@@ -31,7 +31,7 @@ jobs:
           KEY_JKS: ${{ secrets.ANDROID_KEY_JKS }}
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ALIAS_PASSWORD: ${{ secrets.ANDROID_ALIAS_PASSWORD }}
-        run: echo $KEY_JKS > acme-flutter-keystore.jks && flutter build apk --release --split-per-abi
+        run: echo $KEY_JKS > android/acme-flutter-keystore.jks && flutter build apk --release --split-per-abi
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v2
