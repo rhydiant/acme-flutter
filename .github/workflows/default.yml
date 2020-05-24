@@ -19,11 +19,19 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           flutter-version: "1.17.1"
+
+      - name: Get Flutter packages
+        run: flutter pub get
+
+      - name: Run Flutter tests
+        run: flutter test
+
+      - name: Build APK
         env:
           KEY_JKS: ${{ secrets.ANDROID_KEY_JKS }}
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ALIAS_PASSWORD: ${{ secrets.ANDROID_ALIAS_PASSWORD }}
-          run: echo $KEY_JKS > acme-flutter-keystore.jks && flutter build apk --release --split-per-abi
+        run: echo $KEY_JKS > acme-flutter-keystore.jks && flutter build apk --release --split-per-abi
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v2
