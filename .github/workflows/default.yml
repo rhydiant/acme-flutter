@@ -19,6 +19,10 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           flutter-version: "1.17.1"
+        env:
+          KEY_JKS: ${{ secrets.ANDROID_KEY_JKS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ALIAS_PASSWORD: ${{ secrets.ANDROID_ALIAS_PASSWORD }}
 
       - name: Get Flutter packages
         run: flutter pub get
@@ -27,7 +31,7 @@ jobs:
         run: flutter test
 
       - name: Build APK
-        run: flutter build apk --release --flavor nonStore --no-pub --split-per-abi
+        run: flutter build apk --release --no-pub --split-per-abi
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v2
