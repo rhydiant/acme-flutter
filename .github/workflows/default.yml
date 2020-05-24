@@ -1,0 +1,36 @@
+name: Merge to master
+on:
+  push:
+    branches: [master]
+jobs:
+  android:
+    name: Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v1
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: "1.8"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "1.17.1"
+
+      - name: Get Flutter packages
+        run: flutter pub get
+
+      - name: Run Flutter tests
+        run: flutter test
+
+      - name: Build APK
+        run: flutter build apk --release --flavor nonStore --no-pub --split-per-abi
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: android
+          path: build/app/outputs/apk/nonStore/release/*.apk
