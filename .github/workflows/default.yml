@@ -23,7 +23,7 @@ jobs:
           KEY_JKS: ${{ secrets.ANDROID_KEY_JKS }}
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ALIAS_PASSWORD: ${{ secrets.ANDROID_ALIAS_PASSWORD }}
-          run: echo $KEY_JKS > acme-flutter-keystore.jks
+          run: echo $KEY_JKS > android/acme-flutter-keystore.jks
 
       - name: Get Flutter packages
         run: flutter pub get
