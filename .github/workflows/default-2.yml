@@ -1,4 +1,4 @@
-name: Merge
+name: Merges
 on:
   push:
     branches: [master]
